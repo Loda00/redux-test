@@ -1,26 +1,36 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 
 const Result = props => {
-    let res = undefined
-    const { result } = props
-    console.log('result', props, result)
+    const { result, multi } = props
     return (
-        <div>
-            {
-                result ?
-                    <div>
-                        EL resultado es {result}
-                    </div>
-                    : <div>Aún no a hecho ningúnn proceso</div>
-            }
-        </div>
+        <Fragment>
+            <div>
+                {
+                    result ?
+                        <div>
+                            La suma es {result}
+                        </div>
+                        : <div></div>
+                }
+            </div>
+            <div>
+                {
+                    multi ?
+                        <div>
+                            La multiplicacion es : {multi}
+                        </div>
+                        : <div></div>
+                }
+            </div>
+        </Fragment>
     )
 }
 
 
 const mapStateToProps = state => ({
-    result: state.result
+    result: state.showResultReducer,
+    multi: state.multi
 })
 
 

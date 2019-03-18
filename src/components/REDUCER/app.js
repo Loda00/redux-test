@@ -1,12 +1,11 @@
-export const SHOW_RESULT = 'SHOW_RESULT'
+import { SHOW_RESULT } from '../ACTION/result/app'
 
 const defaultState = 0
 
 export function showResultReducer(state = defaultState, action) {
-    console.log(state, action)
     switch (action.type) {
         case SHOW_RESULT:
-            return { ...state, result: action.payload }
+            return action.payload
         default:
             return state
     }

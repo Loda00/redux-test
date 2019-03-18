@@ -3,6 +3,7 @@ import Input from './components/Input/app'
 import { connect } from 'react-redux'
 import Result from './components/Result/app'
 import { showResult } from './components/ACTION/result/app'
+import { multiplication } from './components/ACTION/multiplication/app'
 import './App.css'
 
 class App extends Component {
@@ -12,7 +13,8 @@ class App extends Component {
     this.state = {
       num1: 0,
       num2: 0,
-      result: 0
+      result: 0,
+      multipli: 0
     }
     this.handleOnChange = this.handleOnChange.bind(this)
   }
@@ -27,12 +29,15 @@ class App extends Component {
       () => {
         const { num1, num2 } = this.state
         this.setState({
-          result: Number(num1) + Number(num2)
+          result: Number(num1) + Number(num2),
+          multipli: Number(num1) * Number(num2)
         },
           () => {
-            const { showResult } = this.props
-            const { result } = this.state
+            const { showResult, multiplication } = this.props
+            const { result, multipli } = this.state
+            console.log('props', result, result, multipli )
             showResult(result)
+            multiplication(multipli)
           })
       }
     )
@@ -66,7 +71,8 @@ class App extends Component {
 }
 
 const mapDispatchToProps = {
-  showResult
+  showResult,
+  multiplication
 }
 
 export default connect(null, mapDispatchToProps)(App)
