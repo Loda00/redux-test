@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import Input from './components/Input/app'
 import { connect } from 'react-redux'
-import Result from './components/Result/app'
-import { showResult } from './components/ACTION/result/app'
-import { multiplication } from './components/ACTION/multiplication/app'
+import Result from './react-redux/Result/app'
+import { multiplicar,sumar,valores } from './react-redux/Actions/Calculos/app'
 import './App.css'
 
 class App extends Component {
@@ -13,8 +12,9 @@ class App extends Component {
     this.state = {
       num1: 0,
       num2: 0,
-      result: 0,
-      multipli: 0
+      suma: 0,
+      multiplicacion: 0,
+      arryavalores: []
     }
     this.handleOnChange = this.handleOnChange.bind(this)
   }
@@ -29,15 +29,16 @@ class App extends Component {
       () => {
         const { num1, num2 } = this.state
         this.setState({
-          result: Number(num1) + Number(num2),
-          multipli: Number(num1) * Number(num2)
+          suma: Number(num1) + Number(num2),
+          multiplicacion: Number(num1) * Number(num2),
+          arryavalores: [Number(num1)=== 0 ? null: Number(num1), Number(num2)=== 0 ? null: Number(num2)]
         },
           () => {
-            const { showResult, multiplication } = this.props
-            const { result, multipli } = this.state
-            console.log('props', result, result, multipli )
-            showResult(result)
-            multiplication(multipli)
+            const { multiplicar, sumar, valores } = this.props
+            const { suma, multiplicacion, arryavalores } = this.state
+            sumar(suma)
+            multiplicar(multiplicacion)
+            valores(arryavalores)
           })
       }
     )
@@ -71,8 +72,9 @@ class App extends Component {
 }
 
 const mapDispatchToProps = {
-  showResult,
-  multiplication
+  sumar,
+  multiplicar,
+  valores
 }
 
 export default connect(null, mapDispatchToProps)(App)

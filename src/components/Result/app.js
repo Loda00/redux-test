@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 
 const Result = props => {
-    const { result, multi } = props
+    const { result, multi, arrayNumbers } = props
     return (
         <Fragment>
             <div>
@@ -23,6 +23,7 @@ const Result = props => {
                         : <div></div>
                 }
             </div>
+            <div>{arrayNumbers.length !== 0 ? arrayNumbers : ''}</div>
         </Fragment>
     )
 }
@@ -30,7 +31,8 @@ const Result = props => {
 
 const mapStateToProps = state => ({
     result: state.showResultReducer,
-    multi: state.multi
+    multi: state.multi,
+    arrayNumbers: state.arrayNumbers
 })
 
 
